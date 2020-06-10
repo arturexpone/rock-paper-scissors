@@ -24,9 +24,21 @@ const game = () => {
             option.addEventListener('click', function (e) {
                 const computerNumber = Math.floor(Math.random() * 3);
                 const computerChoise = computerOptions[computerNumber];
-                console.log(computerChoise)
+
+                compareHands(this.className, computerChoise);
+
+                playerHand.src = `./assets/${this.className}.png`;
+                computerHand.src = `./assets/${computerChoise}.png`;
             })
         })
+
+    }
+
+    const updateScore = () => {
+        const pScore = document.querySelector('.player-score p');
+        const cScore = document.querySelector('.computer-score p');
+        pScore.textContent = playerScore;
+        cScore.textContent = computerScore;
 
     }
 
@@ -34,18 +46,43 @@ const game = () => {
 
         const winner = document.querySelector('.winner');
 
-        if (playerChoice === computerChoice) {
-            winner.textContent = 'Ничья! :)';
-            return;
+        if (playerChoice === 'rock') {
+            if (computerChoice === 'scissors') {
+                winner.textContent = 'Пользователь выиграл!'
+            } else if (computerChoice === 'paper') {
+                winner.textContent = 'Компьютер выиграл!'
+            } else if (computerChoice === 'rock') {
+                winner.textContent = 'Ничья :('
+            }
         }
 
-        if (playerChoice === 'rock') {
-            computerChoice === 'scissors' ? winner.textContent = 'Пользователь выиграл!' : null;
-            return;
-        } else {
-            winner.textContent = 'Компьютер выиграл!'
-            return;
+        if (playerChoice === 'scissors') {
+             if (computerChoice === 'rock') {
+                 winner.textContent = 'Компьютер выиграл!';
+             } else if (computerChoice === 'paper') {
+                 winner.textContent = 'Пользователь выиграл!';
+             } else if (computerChoice === 'scissors') {
+                 winner.textContent = 'Ничья :('
+             }
         }
+
+        if (playerChoice === 'paper') {
+            if (computerChoice === 'rock') {
+                winner.textContent = 'Пользователь выиграл!';
+            } else if (computerChoice === 'paper') {
+                winner.textContent = 'Ничья :('
+            } else if (computerChoice === 'scissors') {
+                winner.textContent = 'Компьютер выиграл!';
+            }
+        }
+
+        if (winner.textContent === 'Пользователь выиграл!') {
+            playerScore++;
+        } else if (winner.textContent === 'Компьютер выиграл!') {
+            computerScore++;
+        }
+
+        updateScore();
     }
 
     startGame();
