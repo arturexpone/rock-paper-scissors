@@ -30,6 +30,24 @@ const game = () => {
 
     }
 
+    const compareHands = (playerChoice, computerChoice) => {
+
+        const winner = document.querySelector('.winner');
+
+        if (playerChoice === computerChoice) {
+            winner.textContent = 'Ничья! :)';
+            return;
+        }
+
+        if (playerChoice === 'rock') {
+            computerChoice === 'scissors' ? winner.textContent = 'Пользователь выиграл!' : null;
+            return;
+        } else {
+            winner.textContent = 'Компьютер выиграл!'
+            return;
+        }
+    }
+
     startGame();
     playMatch();
 }
