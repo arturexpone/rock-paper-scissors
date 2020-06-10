@@ -32,10 +32,15 @@ const game = () => {
                 const computerNumber = Math.floor(Math.random() * 3);
                 const computerChoise = computerOptions[computerNumber];
 
-                compareHands(this.className, computerChoise);
+                playerHand.src = `./assets/rock.png`;
+                computerHand.src = `./assets/rock.png`;
 
-                playerHand.src = `./assets/${this.className}.png`;
-                computerHand.src = `./assets/${computerChoise}.png`;
+                setTimeout(() => {
+                    compareHands(this.className, computerChoise);
+
+                    playerHand.src = `./assets/${this.className}.png`;
+                    computerHand.src = `./assets/${computerChoise}.png`;
+                }, 2000)
 
                 playerHand.style.animation = 'shakePlayer 2s ease';
                 computerHand.style.animation = 'shakeComputer 2s ease';
